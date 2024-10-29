@@ -1,13 +1,19 @@
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import { Button, Card, Form, Spinner } from "react-bootstrap";
 import { useStore } from "../../../app/stores/store";
 import { observer } from "mobx-react-lite";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import { Activity } from "../../../app/models/activity";
+import LoadingComponent from "../../../app/layout/LoadingComponent";
+import {v4 as uuid} from 'uuid';
 
 export default observer(function ActivityForm() {
     const {activityStore} = useStore();
-    const {selectedActivity, closeForm, createActivity, updateActivity, loading} = activityStore;
-    
-    const initialState = selectedActivity ?? {
+    const {createActivity, updateActivity, loading, loadActivity, loadingInitial} = activityStore;
+    const {id} = useParams();
+    const navigate = useNavigate();
+
+    const [activity, setActivity] = useState<Activity>({
         id: '',
         title: '',
         category: '',
@@ -15,16 +21,19 @@ export default observer(function ActivityForm() {
         date: '',
         city: '',
         venue: ''
-    }
+    })
 
-    const [activity, setActivity] = useState(initialState);
+    useEffect(() => {
+        if(id) loadActivity(id).then(activity => setActivity(activity!));
+      }, [id, loadActivity])
 
     function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
         event.preventDefault();
-        if (activity.id) {
-            updateActivity(activity);
+        if(!activity.id) {
+            activity.id = uuid();
+            createActivity(activity).then(() => navigate(`/activities/${activity.id}`))
         } else {
-            createActivity(activity);
+            updateActivity(activity).then(() => navigate(`/activities/${activity.id}`));
         }
     }
 
@@ -33,9 +42,11 @@ export default observer(function ActivityForm() {
         setActivity({...activity, [name]: value})
     }
 
+    if(loadingInitial || !activity) return <LoadingComponent content="Loading activity..."/>;
+
     return (
       <>
-        <Card className="mt-4">
+        <Card>
             <Form onSubmit={handleSubmit} autoComplete="off">
                 <Form.Group controlId="formTitle" className="mb-3">
                     <Form.Control type="text" placeholder="Title"  value={activity.title} onChange={handleInputChange} name='title'/>
@@ -62,7 +73,9 @@ export default observer(function ActivityForm() {
                 </Form.Group>
 
                 <div className="d-flex justify-content-end m-4">
-                    <Button onClick={closeForm} variant="secondary" className="me-2" type="button"> Cancel </Button>
+                    <Link to='/activities'>
+                      <Button variant="secondary" content="Cancel"> Cancel </Button>
+                    </Link>                    
                     <Button variant="success" type="submit">
                         {loading ? (
                             <>

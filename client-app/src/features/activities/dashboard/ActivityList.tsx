@@ -2,6 +2,7 @@ import { Badge, Button, Card, Spinner } from "react-bootstrap";
 import { SyntheticEvent, useState } from "react";
 import { useStore } from "../../../app/stores/store";
 import { observer } from "mobx-react-lite";
+import { Link } from "react-router-dom";
 
 export default observer(function ActivityList() {
   const [target, setTarget] = useState('');
@@ -14,7 +15,7 @@ export default observer(function ActivityList() {
   }
 
   return (
-    <div className="mt-4">
+    <div>
       {activitiesByDate.map((activity) => (
         <Card key={activity.id} className="mb-3">
           <Card.Body>
@@ -33,7 +34,9 @@ export default observer(function ActivityList() {
             </div>
 
             <div className="d-flex justify-content-between">
-              <Button onClick={() => activityStore.selectActivity(activity.id)} variant="dark" className="float-right"> View </Button>
+              <Link to={`/activities/${activity.id}`}>
+                <Button variant="dark" className="float-right"> View </Button>
+              </Link>
               <Button
                 name={activity.id}
                 onClick={(e) => handleActivityDelete(e, activity.id)}
