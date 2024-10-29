@@ -1,24 +1,21 @@
 import { Badge, Button, Card, Spinner } from "react-bootstrap";
-import { Activity } from "../../../app/models/activity";
 import { SyntheticEvent, useState } from "react";
+import { useStore } from "../../../app/stores/store";
+import { observer } from "mobx-react-lite";
 
-interface Props {
-  activities: Activity[];
-  selectActivity: (id: string) => void;
-  deleteActivity: (id: string) => void;
-  submitting: boolean;
-}
-
-export default function ActivityList({ activities, selectActivity, deleteActivity, submitting }: Props) {
+export default observer(function ActivityList() {
   const [target, setTarget] = useState('');
+  const {activityStore} = useStore();
+  const {deleteActivity, activitiesByDate, loading} = activityStore;
 
   function handleActivityDelete(e: SyntheticEvent<HTMLButtonElement>, id: string) {
     setTarget(e.currentTarget.name);
     deleteActivity(id);
   }
+
   return (
     <div className="mt-4">
-      {activities.map((activity) => (
+      {activitiesByDate.map((activity) => (
         <Card key={activity.id} className="mb-3">
           <Card.Body>
             <Card.Title as="a" href="#">
@@ -36,15 +33,15 @@ export default function ActivityList({ activities, selectActivity, deleteActivit
             </div>
 
             <div className="d-flex justify-content-between">
-              <Button onClick={() => selectActivity(activity.id)} variant="dark" className="float-right"> View </Button>
+              <Button onClick={() => activityStore.selectActivity(activity.id)} variant="dark" className="float-right"> View </Button>
               <Button
                 name={activity.id}
                 onClick={(e) => handleActivityDelete(e, activity.id)}
                 variant="danger"
                 className="float-right"
-                disabled={submitting && target === activity.id}
+                disabled={loading && target === activity.id}
               >
-                {submitting && target === activity.id ? (
+                {loading && target === activity.id ? (
                   <>
                     <Spinner as="span" animation="border" size="sm" role="status" aria-hidden="true" />
                     <span className="ms-2">Deleting...</span>
@@ -60,4 +57,4 @@ export default function ActivityList({ activities, selectActivity, deleteActivit
       ))}
     </div>
   );
-}
+})

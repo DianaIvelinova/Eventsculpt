@@ -1,16 +1,12 @@
 import { ChangeEvent, useState } from "react";
 import { Button, Card, Form, Spinner } from "react-bootstrap";
-import { Activity } from "../../../app/models/activity";
+import { useStore } from "../../../app/stores/store";
+import { observer } from "mobx-react-lite";
 
-interface Props {
-    activity: Activity | undefined;
-    closeForm: () => void;
-    createOrEdit: (activity: Activity) => void;
-    submitting: boolean;
-}
-
-
-export default function ActivityForm({ activity: selectedActivity, closeForm, createOrEdit, submitting }: Props) {
+export default observer(function ActivityForm() {
+    const {activityStore} = useStore();
+    const {selectedActivity, closeForm, createActivity, updateActivity, loading} = activityStore;
+    
     const initialState = selectedActivity ?? {
         id: '',
         title: '',
@@ -25,7 +21,11 @@ export default function ActivityForm({ activity: selectedActivity, closeForm, cr
 
     function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
         event.preventDefault();
-        createOrEdit(activity);
+        if (activity.id) {
+            updateActivity(activity);
+        } else {
+            createActivity(activity);
+        }
     }
 
     function handleInputChange(event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
@@ -63,8 +63,8 @@ export default function ActivityForm({ activity: selectedActivity, closeForm, cr
 
                 <div className="d-flex justify-content-end m-4">
                     <Button onClick={closeForm} variant="secondary" className="me-2" type="button"> Cancel </Button>
-                    <Button variant="success" type="submit" disabled={submitting}>
-                        {submitting ? (
+                    <Button variant="success" type="submit">
+                        {loading ? (
                             <>
                                 <Spinner as="span" animation="border" size="sm" role="status" aria-hidden="true" />
                                 <span className="ms-2">Submitting...</span>
@@ -78,4 +78,4 @@ export default function ActivityForm({ activity: selectedActivity, closeForm, cr
         </Card>
       </>
     );
-};
+});

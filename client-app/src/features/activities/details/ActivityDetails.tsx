@@ -1,13 +1,13 @@
 import { Button, ButtonGroup, Card } from "react-bootstrap";
-import { Activity } from "../../../app/models/activity";
+import { useStore } from "../../../app/stores/store";
+import LoadingComponent from "../../../app/layout/LoadingComponent";
 
-interface Props {
-  activity: Activity;
-  cancelSelectActivity: () => void;
-  openForm: (id: string) => void;
-}
+export default function ActivityDetails() {
+  const {activityStore} = useStore();
+  const {selectedActivity: activity, openForm, cancelSelectedActivity} = activityStore;
 
-export default function ActivityDetails({ activity, cancelSelectActivity, openForm}: Props) {
+  if(!activity) return <LoadingComponent />;
+
   return (
     <>
         <Card className="mt-4">
@@ -23,7 +23,7 @@ export default function ActivityDetails({ activity, cancelSelectActivity, openFo
                 <Card.Body>
                   <ButtonGroup>
                     <Button onClick={() => openForm(activity.id)} variant="primary" content="Edit"> Edit </Button>
-                    <Button onClick={cancelSelectActivity} variant="secondary" content="Cancel"> Cancel </Button>
+                    <Button onClick={cancelSelectedActivity} variant="secondary" content="Cancel"> Cancel </Button>
                   </ButtonGroup>
                 </Card.Body>
             </Card.Body>
