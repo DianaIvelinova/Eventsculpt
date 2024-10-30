@@ -1,27 +1,14 @@
 import { Button, Card, Col, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { Activity } from "../../../app/models/activity";
-//import { SyntheticEvent, useState } from "react";
-//import { useStore } from "../../../app/stores/store";
-
 interface Props {
     activity: Activity
 }
 
 export default function ActivityListItem({activity}: Props) {
-    /*const [target, setTarget] = useState('');
-    const {activityStore} = useStore();
-    const { deleteActivity } = activityStore;
-  
-    function handleActivityDelete(e: SyntheticEvent<HTMLButtonElement>, id: string) {
-      setTarget(e.currentTarget.name);
-      deleteActivity(id);
-    }*/
-
   return (
     <>
       <Card className="mb-3">
-        {/* Host and Title Segment */}
         <Card.Body>
             <Row>
                 <Col xs={2}>

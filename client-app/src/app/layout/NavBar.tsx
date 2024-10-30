@@ -10,6 +10,7 @@ export default function NavBar() {
                     </Navbar.Brand>
                     <Nav className="me-auto">
                         <Nav.Link href="/activities">Activities</Nav.Link>
+                        <Nav.Link href="/errors">Error</Nav.Link>
                         <Nav.Link href="/createActivity">
                             <Button variant="light">Create Activity</Button>
                         </Nav.Link>
