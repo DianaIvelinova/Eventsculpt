@@ -1,6 +1,7 @@
 import { Button, Card, Col, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { Activity } from "../../../app/models/activity";
+import {format} from 'date-fns';
 interface Props {
     activity: Activity
 }
@@ -31,7 +32,7 @@ export default function ActivityListItem({activity}: Props) {
         {/* Date and Venue Segment */}
         <Card.Body className="border-top">
             <Card.Text>
-                <i className="bi bi-clock"></i> {activity.date}
+                <i className="bi bi-clock"></i> {format(activity.date!, 'dd MMM yyyy h:mm aa')}
                 <i className="bi bi-geo-alt"></i> {activity.venue}
             </Card.Text>
         </Card.Body>

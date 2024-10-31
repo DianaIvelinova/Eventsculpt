@@ -1,7 +1,7 @@
 import { observer } from 'mobx-react-lite';
 import { Card, Row, Col, Image } from 'react-bootstrap';
 import { Activity } from '../../../app/models/activity';
-
+import {format} from 'date-fns';
 interface Props {
     activity: Activity
 }
@@ -25,7 +25,7 @@ export default observer(function ActivityDetailedInfo({ activity }: Props) {
                         <Image height={25} width={25} src='/date.svg'/>
                     </Col>
                     <Col>
-                        <Card.Text>{activity.date}</Card.Text>
+                        <Card.Text>{format(activity.date!, 'dd MMM yyyy h:mm aa')}</Card.Text>
                     </Col>
                 </Row>
             </Card.Body>
