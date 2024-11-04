@@ -26,7 +26,7 @@ export default observer(function ActivityDetails() {
             <Row>
                 <Col className="d-flex" md={10}>
                   <ActivityDetailedHeader activity={activity}/>
-                  <ActivityDetailedSidebar />
+                  <ActivityDetailedSidebar activity={activity} />
                 </Col>
                 <Col md={6}>
                   <ActivityDetailedInfo activity={activity}/>
