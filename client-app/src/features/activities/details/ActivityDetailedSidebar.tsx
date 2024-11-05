@@ -32,7 +32,8 @@ export default observer(function ActivityDetailedSidebar({ activity: {attendees,
                                 <h5 className="mb-0">
                                     <Link to={`/profiles/${attendee.username}`}>{attendee.displayName}</Link>
                                 </h5>
-                                <small className="text-warning">Following</small>
+                                {attendee.following &&
+                                    <small className="text-warning">Following</small>}
                             </div>
                         </>
                         ))}                 

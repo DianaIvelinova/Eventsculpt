@@ -1,39 +1,55 @@
-import { Card, ListGroup, Container, Image } from 'react-bootstrap';
-import Calendar from 'react-calendar'; // Make sure to install react-calendar
-import 'react-calendar/dist/Calendar.css'; // Import calendar styles
+import { observer } from 'mobx-react-lite';
+import { Calendar } from 'react-calendar';
+import { Card, Nav, Row, Col, Container } from 'react-bootstrap';
+import { useStore } from '../../../app/stores/store';
 
-export default function ActivityFilters() {
+export default observer(function ActivityFilters() {
+    const { activityStore: { predicate, setPredicate } } = useStore();
+
     return (
-        <Container style={{ width: '100%', marginTop: '25px' }}>
-            {/* Filters Header */}
-            <Card className="mb-3">
-                <Card.Header className="d-flex align-items-center bg-teal text-white">
-                    <Image src='/filter.svg' width={25} height={25} className="me-2" /> Filters
+        <Container style={{ marginTop: 25 }}>
+            <Card>
+                <Card.Header as="h5" className="bg-teal text-white">
+                    Filters
                 </Card.Header>
-                
-                {/* Filters List */}
-                <ListGroup variant="flush">
-                    <ListGroup.Item
-                        action
+                <Card.Body>
+                    <Nav variant="pills" className="flex-column">
+                        <Nav.Item>
+                            <Nav.Link
+                                active={predicate.has('all')}
+                                onClick={() => setPredicate('all', 'true')}
+                            >
+                                All Activities
+                            </Nav.Link>
+                        </Nav.Item>
+                        <Nav.Item>
+                            <Nav.Link
+                                active={predicate.has('isGoing')}
+                                onClick={() => setPredicate('isGoing', 'true')}
+                            >
+                                I'm going
+                            </Nav.Link>
+                        </Nav.Item>
+                        <Nav.Item>
+                            <Nav.Link
+                                active={predicate.has('isHost')}
+                                onClick={() => setPredicate('isHost', 'true')}
+                            >
+                                I'm hosting
+                            </Nav.Link>
+                        </Nav.Item>
+                    </Nav>
 
-                    >
-                        All Activities
-                    </ListGroup.Item>
-                    <ListGroup.Item
-                        action
-
-                    >
-                        I'm going
-                    </ListGroup.Item>
-                    <ListGroup.Item
-                        action
-
-                    >
-                        I'm hosting
-                    </ListGroup.Item>
-                </ListGroup>
+                    <Row className="mt-4">
+                        <Col>
+                            <Calendar
+                                onChange={(date) => setPredicate('startDate', date as Date)}
+                                value={predicate.get('startDate') || new Date()}
+                            />
+                        </Col>
+                    </Row>
+                </Card.Body>
             </Card>
-            <Calendar />
         </Container>
     );
-}
+});

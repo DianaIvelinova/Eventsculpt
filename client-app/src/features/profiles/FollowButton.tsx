@@ -1,6 +1,6 @@
-import React, { SyntheticEvent } from 'react';
+import { SyntheticEvent } from 'react';
 import { observer } from "mobx-react-lite";
-import { Button, OverlayTrigger, Tooltip } from "react-bootstrap";
+import { Button, Spinner } from "react-bootstrap";
 import { useStore } from '../../app/stores/store';
 import { Profile } from '../../app/models/profile';
 
@@ -16,31 +16,35 @@ export default observer(function FollowButton({ profile }: Props) {
 
     function handleFollow(e: SyntheticEvent, username: string) {
         e.preventDefault();
-        profile.following ? updateFollowing(username, false) : updateFollowing(username, true);
+        if(profile.following) {
+            updateFollowing(username, false)
+        } else {
+            updateFollowing(username, true);
+        }
     }
 
     return (
-        <div className="d-flex">
-            <OverlayTrigger
-                placement="top"
-                overlay={<Tooltip id="follow-tooltip">{profile.following ? 'Unfollow' : 'Follow'}</Tooltip>}
-            >
+        <div style={{ width: '100%' }}>
+            {!loading && (
                 <Button
+                    variant={profile.following ? 'success' : 'outline-success'}
                     onClick={(e) => handleFollow(e, profile.username)}
-                    disabled={loading}
-                    variant={profile.following ? 'outline-danger' : 'outline-success'}
-                    className="flex-fill"
+                    style={{ width: '100%' }}
                 >
-                    {profile.following ? 'Unfollow' : 'Follow'}
+                    {profile.following ? 'Following' : 'Not Following'}
                 </Button>
-            </OverlayTrigger>
-            <Button
-                variant="primary"
-                className="flex-fill ml-2"
-                disabled
-            >
-                {profile.following ? 'Following' : 'Not Following'}
-            </Button>
+            )}
+
+            {loading && (
+                <Button
+                    disabled
+                    variant={profile.following ? 'danger' : 'primary'}
+                    style={{ width: '100%' }}
+                >
+                    <Spinner as="span" animation="border" size="sm" role="status" aria-hidden="true" />
+                    {profile.following ? ' Unfollowing' : ' Following'}
+                </Button>
+            )}
         </div>
     );
 });

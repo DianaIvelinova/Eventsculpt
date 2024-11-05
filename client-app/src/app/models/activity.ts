@@ -12,7 +12,7 @@ export interface IActivity {
     isCancelled: boolean;
     isGoing: boolean;
     isHost: boolean
-    attendees?: Profile[]
+    attendees: Profile[]
     host?: Profile;
 }
 
@@ -38,7 +38,7 @@ export class Activity implements IActivity {
     isCancelled: boolean = false;
     isGoing: boolean = false;
     isHost: boolean = false;
-    attendees?: Profile[];
+    attendees: Profile[] = [];
     host?: Profile;
   }
 

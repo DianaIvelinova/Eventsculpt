@@ -1,42 +1,46 @@
-import NavBar from './NavBar';
-import { Container } from 'react-bootstrap';
-import { observer } from 'mobx-react-lite';
-import { Outlet, useLocation } from 'react-router-dom';
-import HomePage from '../../features/home/HomePage';
-import { ToastContainer } from 'react-toastify';
-import { useStore } from '../stores/store';
-import { useEffect } from 'react';
-import LoadingComponent from './LoadingComponent';
-import ModalContainer from '../common/modals/ModalContainer';
+import NavBar from "./NavBar";
+import { Container } from "react-bootstrap";
+import { observer } from "mobx-react-lite";
+import { Outlet, ScrollRestoration, useLocation } from "react-router-dom";
+import HomePage from "../../features/home/HomePage";
+import { ToastContainer } from "react-toastify";
+import { useStore } from "../stores/store";
+import { useEffect } from "react";
+import LoadingComponent from "./LoadingComponent";
+import ModalContainer from "../common/modals/ModalContainer";
 
 function App() {
   const location = useLocation();
-  const {commonStore, userStore} = useStore();
+  const { commonStore, userStore } = useStore();
 
   useEffect(() => {
-    if( commonStore.token ) {
-      userStore.getUser().finally(() => commonStore.setAppLoaded())
+    if (commonStore.token) {
+      userStore.getUser().finally(() => commonStore.setAppLoaded());
     } else {
-      commonStore.setAppLoaded()
+      commonStore.setAppLoaded();
     }
-  }, [commonStore, userStore])
+  }, [commonStore, userStore]);
 
-  if(!commonStore.appLoaded) return <LoadingComponent content='Loading app..' />
+  if (!commonStore.appLoaded)
+    return <LoadingComponent content="Loading app.." />;
 
   return (
     <>
-    <ModalContainer />
-    <ToastContainer position='bottom-right' hideProgressBar theme='colored'/>
-      {location.pathname === '/' ? <HomePage /> : (
+      <ScrollRestoration />
+      <ModalContainer />
+      <ToastContainer position="bottom-right" hideProgressBar theme="colored" />
+      {location.pathname === "/" ? (
+        <HomePage />
+      ) : (
         <>
           <NavBar />
-          <Container style={{marginTop: 70}}>
+          <Container style={{ marginTop: 70 }}>
             <Outlet />
           </Container>
-      </>
+        </>
       )}
     </>
   );
-};
+}
 
 export default observer(App);

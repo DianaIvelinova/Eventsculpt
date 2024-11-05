@@ -1,9 +1,8 @@
-import { Card, Button } from 'react-bootstrap';
+import { Card } from 'react-bootstrap';
 import { Profile } from "../../app/models/profile";
 import { observer } from "mobx-react-lite";
 import { Link } from "react-router-dom";
-//import FollowButton from './FollowButton';
-
+import FollowButton from './FollowButton';
 interface Props {
     profile: Profile;
 }
@@ -28,8 +27,8 @@ export default observer(function ProfileCard({ profile }: Props) {
                 <div>
                     <i className="fas fa-user" /> {profile.followersCount} Followers
                 </div>
-                <Button profile={profile} />
             </Card.Footer>
+            <FollowButton profile={profile} />
         </Card>
     );
 });

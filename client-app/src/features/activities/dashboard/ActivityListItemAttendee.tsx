@@ -9,11 +9,10 @@ interface Props {
 }
 
 export default observer(function ActivityListItemAttendee({ attendees }: Props) {
-    // const styles = {
-    //     borderColor: 'orange',
-    //     borderWidth: 3
-        
-    // };
+    const styles = {
+        borderColor: 'red',
+        borderWidth: 3 
+    };
 
     const renderTooltip = (attendee: Profile) => (
         <Tooltip id="profile-tooltip">
@@ -33,7 +32,7 @@ export default observer(function ActivityListItemAttendee({ attendees }: Props) 
                             width={30}
                             height={30}
                             fluid
-                            //style={attendee.following ? styles : undefined}
+                            style={attendee.following ? styles : undefined}
                             roundedCircle
                             src={attendee.image || `/user.svg`}
                         />

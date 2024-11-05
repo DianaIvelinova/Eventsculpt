@@ -19,7 +19,7 @@ export default function ActivityListItem({activity}: Props) {
             <Row>
                 <Col xs={2}>
                     <img
-                        src={'/user.svg'}
+                        src={activity.host?.image || '/user.svg'}
                         style={{ marginBottom: 5, width: '50px' }}
                     />
                 </Col>
@@ -28,7 +28,7 @@ export default function ActivityListItem({activity}: Props) {
                         {activity.title}
                     </CardTitle>
                     <Card.Subtitle className="text-muted">
-                        Hosted by {activity.host?.displayName}
+                        Hosted by <Link to={`/profiles/${activity.hostUsername}`}> {activity.host?.displayName} </Link>
                     </Card.Subtitle>
                     {activity.isHost && (
                         <CardText>
