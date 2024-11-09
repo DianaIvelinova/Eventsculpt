@@ -20,7 +20,11 @@ export default observer(function RegisterForm() {
                     displayName: Yup.string().required('Display name is required'),
                     username: Yup.string().required('Username is required'),
                     email: Yup.string().email('Invalid email').required('Email is required'),
-                    password: Yup.string().required('Password is required'),
+                    password: Yup.string().required('Password is required')
+                        .min(6, 'Password must be at least 6 characters')
+                        .matches(/[A-Z]/, 'Password must contain at least one uppercase letter')
+                        .matches(/[a-z]/, 'Password must contain at least one lowercase letter')
+                        .matches(/\d/, 'Password must contain at least one number')
                 })}
             >
                 {({ handleSubmit, isSubmitting, errors, isValid, dirty }) => (
@@ -50,7 +54,7 @@ export default observer(function RegisterForm() {
                             <ValidationError errors={errors.error as unknown as string[]} />} />
                         <Button
                             disabled={!isValid || !dirty || isSubmitting} 
-                            variant='success' 
+                            variant='dark' 
                             type="submit" 
                             className="mt-3"
                         >

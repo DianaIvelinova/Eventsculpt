@@ -24,12 +24,11 @@ export default observer(function FollowButton({ profile }: Props) {
     }
 
     return (
-        <div style={{ width: '100%' }}>
+        <>
             {!loading && (
                 <Button
-                    variant={profile.following ? 'success' : 'outline-success'}
+                    variant={profile.following ? 'dark' : 'outline-secondary'}
                     onClick={(e) => handleFollow(e, profile.username)}
-                    style={{ width: '100%' }}
                 >
                     {profile.following ? 'Following' : 'Not Following'}
                 </Button>
@@ -38,13 +37,12 @@ export default observer(function FollowButton({ profile }: Props) {
             {loading && (
                 <Button
                     disabled
-                    variant={profile.following ? 'danger' : 'primary'}
-                    style={{ width: '100%' }}
+                    variant={profile.following ? 'dark' : 'secondary'}
                 >
                     <Spinner as="span" animation="border" size="sm" role="status" aria-hidden="true" />
                     {profile.following ? ' Unfollowing' : ' Following'}
                 </Button>
             )}
-        </div>
+        </>
     );
 });

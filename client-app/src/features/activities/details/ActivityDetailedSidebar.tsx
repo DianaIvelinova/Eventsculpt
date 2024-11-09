@@ -11,32 +11,36 @@ export default observer(function ActivityDetailedSidebar({ activity: {attendees,
     if(!attendees) return null;
     return (
         <>
-            <Card className="text-center text-black bg-teal mb-3" style={{ border: 'none' }}>
-                <Card.Header as="h5">{attendees.length} {attendees.length === 1 ? 'Person' : 'People'} </Card.Header>
+            <Card className="w-25 text-center text-white mb-3" style={{ border: 'none' }}>
+                <Card.Header className='bg-dark' as="h5">
+                    {attendees.length} {attendees.length === 1 ? 'Person' : 'People'}
+                </Card.Header>
                 <ListGroup variant="flush">
-                    <ListGroup.Item className="d-flex align-items-center">
-                        {attendees.map (attendee => (
-                            <>
-                                <div style={{ position: 'relative' }} key={attendee.username}>
-                                 {attendee.username === host?.username &&
-                                <Badge
-                                    bg="warning"
-                                    text="dark"
-                                    style={{ position: 'absolute', top: '0', right: '-10px' }}
-                                >
-                                    Host
-                                </Badge>}
+                    <ListGroup.Item className="d-flex flex-column align-items-center">
+                        {attendees.map((attendee) => (
+                            <div key={attendee.username} className='mb-2' style={{ position: 'relative' }}>
+                                {attendee.username === host?.username && (
+                                    <Badge
+                                        bg="dark"
+                                        text="light"
+                                        style={{ position: 'absolute', top: '0', right: '0' }}
+                                    >
+                                        Host
+                                    </Badge>
+                                )}
+                                <Image src={attendee.image || "/user.svg"} roundedCircle width="50" height="50" className="mt-3" />
+                                <div>
+                                    <h5 className="mb-0">
+                                        <Link to={`/profiles/${attendee.username}`} className='navLinkPurple'>
+                                            {attendee.displayName}
+                                        </Link>
+                                    </h5>
+                                    {attendee.following && (
+                                        <small className="text-dark fw-semibold">Following</small>
+                                    )}
+                                </div>
                             </div>
-                            <Image src={attendee.image || "/cute.png"} roundedCircle width="50" height="50" className="me-3" />
-                            <div>
-                                <h5 className="mb-0">
-                                    <Link to={`/profiles/${attendee.username}`}>{attendee.displayName}</Link>
-                                </h5>
-                                {attendee.following &&
-                                    <small className="text-warning">Following</small>}
-                            </div>
-                        </>
-                        ))}                 
+                        ))}
                     </ListGroup.Item>
                 </ListGroup>
             </Card>

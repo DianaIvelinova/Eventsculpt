@@ -51,7 +51,7 @@ export default function ActivityListItemPlaceholder() {
         </Card.Body>
 
         <Card.Body>
-          <Button disabled variant="primary">
+          <Button disabled variant="dark" className="w-100">
             <Spinner animation="border" size="sm" /> View
           </Button>
         </Card.Body>

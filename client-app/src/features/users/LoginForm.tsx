@@ -25,7 +25,7 @@ export default observer(function LoginForm() {
                                 {errors.error}
                             </Alert>
                         } />
-                        <Button variant='success' type="submit" disabled={isSubmitting} >
+                        <Button variant='dark' type="submit" disabled={isSubmitting} >
                             {isSubmitting ? 'Logging in...' : 'Login'}
                         </Button>
                     </Form>

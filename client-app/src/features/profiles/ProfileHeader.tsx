@@ -1,5 +1,5 @@
 import { observer } from 'mobx-react-lite';
-import { Card, Row, Col, Image, Badge } from 'react-bootstrap';
+import { Card, Row, Col, Image } from 'react-bootstrap';
 import { Profile } from '../../app/models/profile';
 import FollowButton from './FollowButton';
 
@@ -23,16 +23,16 @@ export default observer(function ProfileHeader({ profile }: Props) {
                                 />
                             </Col>
                             <Col>
-                                <Card.Title as="h1">{profile.displayName}</Card.Title>
+                                <Card.Title as="h1" className="d-flex align-items-center">
+                                    <div className='me-2'> {profile.displayName} </div>
+                                    <FollowButton profile={profile} />
+                                </Card.Title>
+                                <div className="mt-2 d-flex">
+                                    <div className="me-2"> {profile.followersCount} Followers </div>
+                                    <div> {profile.followingCount} Following </div>
+                                </div>
                             </Col>
                         </Row>
-                    </Col>
-                    <Col md={4} className="text-center">
-                        <Badge pill bg="light" className="me-2"> {profile.followersCount} Followers </Badge>
-                        <Badge pill bg="light"> {profile.followingCount} Following </Badge>
-                        <div className="mt-3">
-                            <FollowButton profile={profile} />
-                        </div>
                     </Col>
                 </Row>
             </Card.Body>

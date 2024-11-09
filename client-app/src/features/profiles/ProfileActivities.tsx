@@ -1,6 +1,6 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { observer } from 'mobx-react-lite';
-import { Tab, Row, Col, Card, Spinner, Nav, CardGroup } from 'react-bootstrap';
+import { Tab, Card, Spinner, Nav, CardGroup } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { UserActivity } from '../../app/models/profile';
 import { format } from 'date-fns';
@@ -12,7 +12,7 @@ const panes = [
     { eventKey: 'hosting', title: 'Hosting' }
 ];
 
-const ProfileActivities: React.FC = observer(() => {
+export default observer(function ProfileActivities() {
     const { profileStore } = useStore();
     const {
         loadUserActivities,
@@ -35,14 +35,10 @@ const ProfileActivities: React.FC = observer(() => {
 
     return (
         <Tab.Container defaultActiveKey="future" onSelect={handleSelect}>
-            <Row>
-                <Col>
+            <Card className="mb-3">
+                <Card.Body>
                     <h2>Activities</h2>
-                </Col>
-            </Row>
-            <Row>
-                <Col>
-                    <Nav variant="tabs">
+                    <Nav variant="tabs" className="mb-3">
                         {panes.map(pane => (
                             <Nav.Item key={pane.eventKey}>
                                 <Nav.Link eventKey={pane.eventKey}>
@@ -59,7 +55,7 @@ const ProfileActivities: React.FC = observer(() => {
                                 ) : (
                                     <CardGroup>
                                         {userActivities.map((activity: UserActivity) => (
-                                            <Card as={Link} to={`/activities/${activity.id}`} key={activity.id} style={{ width: '18rem', margin: '1rem' }}>
+                                            <Card as={Link} to={`/activities/${activity.id}`} key={activity.id} style={{ width: '18rem', margin: '0.5rem', border: '1px solid #80808030'}}>
                                                 <Card.Img
                                                     variant="top"
                                                     src={`/categoryImages/${activity.category}.jpg`}
@@ -67,10 +63,10 @@ const ProfileActivities: React.FC = observer(() => {
                                                 />
                                                 <Card.Body>
                                                     <Card.Title className="text-center">{activity.title}</Card.Title>
-                                                    <Card.Text className="text-center">
+                                                    <div className="text-center">
                                                         <div>{format(new Date(activity.date), 'do LLL')}</div>
                                                         <div>{format(new Date(activity.date), 'h:mm a')}</div>
-                                                    </Card.Text>
+                                                    </div>
                                                 </Card.Body>
                                             </Card>
                                         ))}
@@ -79,10 +75,8 @@ const ProfileActivities: React.FC = observer(() => {
                             </Tab.Pane>
                         ))}
                     </Tab.Content>
-                </Col>
-            </Row>
+                </Card.Body>
+            </Card>
         </Tab.Container>
     );
 });
-
-export default ProfileActivities;

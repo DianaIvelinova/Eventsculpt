@@ -49,12 +49,12 @@ const PhotoUploadWidget = observer(({ loading, uploadPhoto }: Props) => {
                 <Card>
                     <Card.Body>
                         <Card.Title>Step 3 - Preview & Upload</Card.Title>
-                        <div className="img-preview" style={{ minHeight: 200, overflow: 'hidden' }} />
+                        <div className="img-preview mb-2" style={{ minHeight: 200, overflow: 'hidden' }} />
                         {files && files.length > 0 && (
                             <ButtonGroup className="d-flex justify-content-between">
                                 <Button 
                                     onClick={onCrop} 
-                                    variant="success" 
+                                    variant="dark" 
                                     disabled={loading}
                                 >
                                     {loading ? (

@@ -25,7 +25,7 @@ export default observer(function ActivityDetailedChat({ activityId }: Props) {
     
     return (
         <>
-            <Card className="text-center text-black bg-white" style={{ border: 'none' }}>
+            <Card className="text-center text-white bg-dark" style={{ border: 'none' }}>
                 <Card.Header as="h5">Chat about this event</Card.Header>
             </Card>
             <Card>
@@ -48,6 +48,7 @@ export default observer(function ActivityDetailedChat({ activityId }: Props) {
                                                 <textarea placeholder='Enter your comment and press enter to submit'
                                                 rows={2}
                                                 {...props.field}
+                                                className="form-control styled-textarea"
                                                 onKeyDown={e => {
                                                     if (e.key === 'Enter' && e.shiftKey) {
                                                         return;
@@ -69,7 +70,7 @@ export default observer(function ActivityDetailedChat({ activityId }: Props) {
                 <Card.Body>
                 {commentStore.comments.map(comment => (
                     <div key={comment.id } className="d-flex mb-3">
-                    <Image src={comment.image || "/cute.png"} roundedCircle width="40" height="40" className="me-3" />
+                    <Image src={comment.image || "/user.svg"} roundedCircle width="40" height="40" className="me-3" />
                     <div>
                         <Link to={`profiles/${comment.username}`}><strong>{comment.displayName}</strong></Link>
                         <div className="text-muted small"> {formatDistanceToNow(comment.createdAt)} ago</div>

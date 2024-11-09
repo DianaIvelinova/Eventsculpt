@@ -12,14 +12,14 @@ const ProfileAbout: React.FC = observer(() => {
     return (
         <Card className="mb-3">
             <Card.Body>
-                <Row className="align-items-center">
+                <Row className="align-items-center mb-2">
                     <Col>
                         <h4>{`About ${profile?.displayName}`}</h4>
                     </Col>
                     {isCurrentUser && (
                         <Col xs="auto">
                             <Button
-                                variant="outline-primary"
+                                variant="dark"
                                 onClick={() => setEditMode(prev => !prev)}
                             >
                                 {editMode ? 'Cancel' : 'Edit Profile'}
@@ -32,7 +32,7 @@ const ProfileAbout: React.FC = observer(() => {
                         {editMode ? (
                             <ProfileEditForm setEditMode={setEditMode} />
                         ) : (
-                            <span style={{ whiteSpace: 'pre-wrap' }}>{profile?.bio}</span>
+                            <div style={{ whiteSpace: 'pre-wrap' }}>{!profile?.bio ? <div>No added description ...</div> : profile?.bio}</div>
                         )}
                     </Col>
                 </Row>

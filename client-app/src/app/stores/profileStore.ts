@@ -20,8 +20,10 @@ export default class ProfileStore {
         reaction(
             () => this.activeTab,
             activeTab => {
+                console.log('ProfileStore: activeTab changed to:', activeTab);
                 if (activeTab === 3 || activeTab === 4) {
                     const predicate = activeTab === 3 ? 'followers' : 'following';
+                    console.log('ProfileStore: Loading followings with predicate:', predicate);
                     this.loadFollowings(predicate);
                 } else {
                     this.followings = [];
@@ -50,7 +52,7 @@ export default class ProfileStore {
                 this.loadingProfile = false;
             })
         } catch (error) {
-            console.log(error);
+            console.error('ProfileStore: Error loading profile:', error);
             runInAction(() => {
                 this.loadingProfile = false;
             })
@@ -162,12 +164,16 @@ export default class ProfileStore {
         this.loadingFollowings = true;
         try {
             const followings = await agent.Profiles.listFollowings(this.profile!.username, predicate);
+            console.log('ProfileStore: Followings loaded:', followings);
+
             runInAction(() => {
                 this.followings = followings;
+                console.log('ProfileStore: Followings loaded:', followings);
                 this.loadingFollowings = false;
+                console.log('Loading followings:', this.loadingFollowings);
             })
         } catch (error) {
-            console.log(error);
+            console.error('ProfileStore: Error loading followings:', error);
             runInAction(() => this.loadingFollowings = false);
         }
     }

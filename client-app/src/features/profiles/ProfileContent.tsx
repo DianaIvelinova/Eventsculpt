@@ -11,7 +11,7 @@ interface Props {
     profile: Profile
 }
 
-const ProfileContent = observer(({ profile }: Props) => {
+export default observer(function ProfileContent({ profile }: Props) {
     const { profileStore } = useStore();
 
     const panes = [
@@ -43,26 +43,26 @@ const ProfileContent = observer(({ profile }: Props) => {
     ];
 
     return (
-        <Tab.Container 
-            defaultActiveKey={panes[0].eventKey} 
-            onSelect={(eventKey) => profileStore.setActiveTab(panes.findIndex(pane => pane.eventKey === eventKey))}
-        >
-            <Nav variant="pills" className="flex-column">
-                {panes.map(pane => (
-                    <Nav.Item key={pane.eventKey}>
-                        <Nav.Link eventKey={pane.eventKey}>{pane.title}</Nav.Link>
-                    </Nav.Item>
-                ))}
-            </Nav>
-            <Tab.Content>
-                {panes.map(pane => (
-                    <Tab.Pane eventKey={pane.eventKey} key={pane.eventKey}>
-                        {pane.content}
-                    </Tab.Pane>
-                ))}
-            </Tab.Content>
-        </Tab.Container>
+        <>
+            <Tab.Container 
+                defaultActiveKey={panes[0].eventKey}
+                onSelect={(eventKey) => profileStore.setActiveTab(panes.findIndex(pane => pane.eventKey === eventKey))}
+            >
+                <Nav variant="pills"  className="mb-3 flex-column profile-content fw-semibold rounded-1 border">
+                    {panes.map(pane => (
+                        <Nav.Item key={pane.eventKey}>
+                            <Nav.Link eventKey={pane.eventKey}>{pane.title}</Nav.Link>
+                        </Nav.Item>
+                    ))}
+                </Nav>
+                <Tab.Content>
+                    {panes.map(pane => (
+                        <Tab.Pane eventKey={pane.eventKey} key={pane.eventKey}>
+                            {pane.content}
+                        </Tab.Pane>
+                    ))}
+                </Tab.Content>
+            </Tab.Container>
+        </>
     );
 });
-
-export default ProfileContent;

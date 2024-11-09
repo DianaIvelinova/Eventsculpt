@@ -50,7 +50,7 @@ const ProfileEditForm: React.FC<Props> = observer(({ setEditMode }) => {
                     <Row>
                         <Col className="d-flex justify-content-end">
                             <Button
-                                variant="success"
+                                variant="dark"
                                 type='submit'
                                 disabled={!isValid || !dirty || isSubmitting}
                             >

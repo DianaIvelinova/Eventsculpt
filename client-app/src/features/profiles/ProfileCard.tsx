@@ -15,20 +15,20 @@ export default observer(function ProfileCard({ profile }: Props) {
     }
 
     return (
-        <Card as={Link} to={`/profiles/${profile.username}`} className="text-center">
-            <Card.Img variant="top" src={profile.image || '/assets/user.png'} />
-            <Card.Body>
-                <Card.Title>{profile.displayName}</Card.Title>
-                <Card.Text>
-                    {truncate(profile.bio)}
-                </Card.Text>
-            </Card.Body>
-            <Card.Footer className="text-muted">
-                <div>
-                    <i className="fas fa-user" /> {profile.followersCount} Followers
-                </div>
-            </Card.Footer>
-            <FollowButton profile={profile} />
-        </Card>
+        <div className='card-wrapper'>
+            <Card as={Link} to={`/profiles/${profile.username}`} className="text-center profile-card">
+                <Card.Img className='p-2' src={profile.image || '/user.svg'} />
+                <Card.Body className='profile-card-body p-0'>
+                    <Card.Title className="fw-bold text-decoration-none">{profile.displayName}</Card.Title>
+                    <Card.Text>
+                        {truncate(profile.bio)}
+                    </Card.Text>
+                    <Card.Footer className="text-muted">
+                        <div className='mb-1'> {profile.followersCount} Followers </div>
+                        <FollowButton profile={profile} />
+                    </Card.Footer>
+                </Card.Body>
+            </Card>
+        </div>
     );
 });

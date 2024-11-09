@@ -25,7 +25,10 @@ export default observer(function ActivityDashboard() {
 
     return (
         <>
-            <Row>
+            <Row className="mt-5">
+                <Col width="1">
+                    <ActivityFilters />              
+                </Col>
                 <Col width="10">
                 {activityStore.loadingInitial && activityRegistry.size === 0 && !loadingNext ? (
                     <>
@@ -43,16 +46,11 @@ export default observer(function ActivityDashboard() {
                         </InfiniteScroll>
                     )}
                 </Col>
-                <Col width="6">
-                    <ActivityFilters />              
-                </Col>
-                <Col width="10">
                 {loadingNext && (
                     <div className="d-flex justify-content-center align-items-center">
                         <Spinner animation="border" role="status" />
                     </div>
                 )}
-                </Col>
             </Row>
         </>
     )

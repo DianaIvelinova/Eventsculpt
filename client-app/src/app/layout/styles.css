@@ -2,18 +2,22 @@ body {
     background-color: #eaeaea !important;
 }
 
+a{
+  text-decoration: none !important;
+}
+
 .activityImgText {
-    position: absolute;
-    bottom: 5%;
-    left: 5%;
-    width: 100%;
-    color: white;
-    z-index: 1;
+  position: absolute;
+  bottom: 5%;
+  left: 5%;
+  width: 100%;
+  color: white;
+  z-index: 1;
 }
 
 .imgContainer {
-    position: relative;
-    overflow: hidden;
+  position: relative;
+  overflow: hidden;
 }
 
 .react-calendar {
@@ -33,7 +37,7 @@ body {
     align-items: center;
     background-image: linear-gradient(
             135deg,
-            rgb(1, 4, 14) 0%,
+            rgb(33, 37, 41) 0%,
             rgb(93, 35, 174) 69%,
             rgb(136, 101, 134) 89%
     ) !important;
@@ -56,3 +60,119 @@ body {
   }
   
   /*end home page styles*/
+
+.activity-attendee-img {
+  transition: transform 0.2s ease-in-out;
+}
+
+.activity-attendee-img:hover {
+  transform: scale(1.1);
+  cursor: pointer;
+}
+
+.card-subtitle.bg-danger {
+  font-weight: bold;
+  font-size: 1rem;
+  text-transform: uppercase;
+}
+
+.card-text i {
+  margin-right: 8px;
+}
+
+.user-image:hover {
+  transition: transform 0.2s ease-in-out;
+}
+
+.user-image:hover {
+  transform: scale(1.1);
+  cursor: pointer;
+}
+
+.tooltip {
+  border-radius: 5px;
+  opacity: 1 !important;
+}
+
+.tooltip-inner {
+  background-color: #000000ae !important;
+}
+
+.nav-link.active {
+  background-color: #5B3B8C !important;
+  color: #fff !important;
+}
+
+.nav-link {
+  color: #212529 !important;
+}
+
+.navLink {
+  color: white !important;
+}
+
+.navLinkPurple {
+  color: #5B3B8C !important;
+}
+
+.filterTextColor.active {
+  background-color: #212529;
+  color: white;
+}
+
+.react-calendar {
+  width: 100% !important;
+  margin: 0 auto;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  font-family: 'Arial', sans-serif;
+  overflow: hidden;
+}
+
+.react-calendar__navigation {
+  background-color: #212529;
+  color: #fff;
+}
+
+.react-calendar__navigation button:hover {
+  background-color: #f4f4f4 !important;
+  color: #212529;
+}
+
+.react-calendar__navigation button {
+  color: white;
+}
+
+.react-calendar__tile--active {
+  background-color: #212529 !important;
+}
+
+.react-calendar__tile--now {
+  background-color: #5B3B8C !important;
+  color: #fff !important;
+}
+
+.profile-content {
+  background-color: #fff;
+}
+
+.profile-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
+
+.profile-card-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.card-wrapper {
+  height: 100%;
+  display: flex;
+}
+
+

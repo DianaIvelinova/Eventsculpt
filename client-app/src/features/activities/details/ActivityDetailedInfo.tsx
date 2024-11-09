@@ -14,7 +14,7 @@ export default observer(function ActivityDetailedInfo({ activity }: Props) {
                     <Col xs={1} className="text-center">
                         <Image height={25} width={25} src='/info.svg'/>
                     </Col>
-                    <Col>
+                    <Col xs={11}>
                         <Card.Text>{activity.description}</Card.Text>
                     </Col>
                 </Row>

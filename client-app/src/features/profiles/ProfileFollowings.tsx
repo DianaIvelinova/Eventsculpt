@@ -1,14 +1,14 @@
-import { Tab, Row, Col, Spinner } from 'react-bootstrap';
+import { Row, Col, Spinner, Card } from 'react-bootstrap';
 import ProfileCard from './ProfileCard';
 import { useStore } from '../../app/stores/store';
 import { observer } from 'mobx-react-lite';
 
-const ProfileFollowings = observer(() => {
+export default observer(function ProfileFollowings() {
     const { profileStore } = useStore();
     const { profile, followings, loadingFollowings, activeTab } = profileStore;
 
     return (
-        <Tab.Pane eventKey="followings">
+        <Card className='p-2'>
             {loadingFollowings ? (
                 <Spinner animation="border" />
             ) : (
@@ -23,16 +23,16 @@ const ProfileFollowings = observer(() => {
                         </Col>
                     </Row>
                     <Row>
-                        {followings.map((profile) => (
-                            <Col xs={6} md={4} lg={3} key={profile.username} className="mb-3">
-                                <ProfileCard profile={profile} />
-                            </Col>
-                        ))}
+                        {followings.map((profile) => {
+                            return (
+                                <Col xs={6} md={4} lg={3} key={profile.username} className="mb-3">
+                                    <ProfileCard profile={profile} />
+                                </Col>
+                            );
+                        })}
                     </Row>
                 </>
             )}
-        </Tab.Pane>
+        </Card>
     );
 });
-
-export default ProfileFollowings;
