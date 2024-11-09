@@ -55,16 +55,16 @@ export default function ActivityListItem({ activity }: Props) {
 
       <CardBody className="bg-light p-3">
         <CardText className="text-muted">
-          <i className="bi bi-clock" style={{ marginRight: 5 }}></i>
+          <i className="bi bi-clock"></i>
           {format(activity.date!, 'dd MMM yyyy h:mm aa')}
         </CardText>
         <CardText className="text-muted">
-          <i className="bi bi-geo-alt" style={{ marginRight: 5 }}></i>
+          <i className="bi bi-geo-alt" ></i>
           {activity.venue}
         </CardText>
       </CardBody>
 
-      <CardBody className="border-top">
+      <CardBody className="border-bottom">
         <ActivityListItemAttendee attendees={activity.attendees!} />
       </CardBody>
 

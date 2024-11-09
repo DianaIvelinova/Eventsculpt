@@ -17,7 +17,7 @@ export default observer(function ActivityDetailedHeader({ activity }: Props) {
     const { activityStore: { updateAttendance, loading, cancelActivityToggle} } = useStore();
 
     return (
-        <Card className="mb-3 me-3">
+        <Card>
             <div className='imgContainer'>
                 {activity.isCancelled && 
                     <Card.Text style={{position: 'absolute', zIndex: 1000, left: -14, top: 40 }}> Cancelled </Card.Text>

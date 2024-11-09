@@ -11,7 +11,7 @@ export default observer(function NavBar() {
       <header>
         <Navbar className="navbar navbar-dark bg-dark" fixed="top">
           <Container>
-            <Navbar.Brand href="/">
+            <Navbar.Brand href="/activities">
               <img
                 className="d-inline-block align-top me-2"
                 src="/cocktail.png"
@@ -21,9 +21,6 @@ export default observer(function NavBar() {
               />
               <span className="fw-bold text-light">Eventsculpt</span>
             </Navbar.Brand>
-            <Nav className="me-auto">
-              <Nav.Link className="navLink" href="/activities">Activities</Nav.Link>
-            </Nav>
             <Nav className="ms-auto">
               <Nav.Item className="d-flex flex-row">
                 <Link to={`/profiles/${user?.username}`}>

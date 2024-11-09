@@ -10,7 +10,7 @@ interface Props {
 
 export default observer(function FollowButton({ profile }: Props) {
     const { profileStore, userStore } = useStore();
-    const { updateFollowing, loading } = profileStore;
+    const { updateFollowing , loadingFollowButton } = profileStore;
 
     if (userStore.user?.username === profile.username) return null;
 
@@ -24,25 +24,25 @@ export default observer(function FollowButton({ profile }: Props) {
     }
 
     return (
-        <>
-            {!loading && (
+        <div>
+            {!loadingFollowButton[profile.username] ? (
                 <Button
                     variant={profile.following ? 'dark' : 'outline-secondary'}
                     onClick={(e) => handleFollow(e, profile.username)}
+                    className="w-100"
                 >
-                    {profile.following ? 'Following' : 'Not Following'}
+                    {profile.following ? 'Following' : 'Follow'}
                 </Button>
-            )}
-
-            {loading && (
+            ) : (
                 <Button
                     disabled
                     variant={profile.following ? 'dark' : 'secondary'}
+                    className="d-flex w-100"
                 >
-                    <Spinner as="span" animation="border" size="sm" role="status" aria-hidden="true" />
-                    {profile.following ? ' Unfollowing' : ' Following'}
+                    <Spinner as="span" className="m-1" animation="border" size="sm" role="status" aria-hidden="true" />
+                    {profile.following ? ' Unfollow' : ' Following'}
                 </Button>
             )}
-        </>
+        </div>
     );
 });

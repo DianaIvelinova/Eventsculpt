@@ -23,10 +23,10 @@ export default observer(function ActivityForm() {
     const [activity, setActivity] = useState<ActivityFormValues>(new ActivityFormValues());
 
     const validationSchema = Yup.object({
-        title: Yup.string().required('The activity title is required'),
-        description: Yup.string().required('The activity description is required'),
+        title: Yup.string().required('the activity title is required'),
+        description: Yup.string().required('the activity description is required'),
         category: Yup.string().required(),
-        date: Yup.string().required('Date is required!'),
+        date: Yup.string().required('date is required'),
         venue: Yup.string().required(),
         city: Yup.string().required(),
     })
@@ -55,7 +55,7 @@ export default observer(function ActivityForm() {
             <Card.Header>Activity details</Card.Header>
             <Formik validationSchema={validationSchema} enableReinitialize initialValues={activity} onSubmit={values =>  handleFormSubmit(values)}>
                 {({ handleSubmit, isValid, isSubmitting, dirty}) => (
-                    <Form className="form" onSubmit={handleSubmit} autoComplete="off">                       
+                    <Form onSubmit={handleSubmit} autoComplete="off">                       
                         <MyTextInput type="text" placeholder="Title" name='title'/>
                         
                         <MyTextAreaInput rows={3} placeholder="Description" name='description'/>
@@ -72,9 +72,9 @@ export default observer(function ActivityForm() {
         
                         <div className="d-flex justify-content-end m-4">
                             <Link to='/activities'>
-                                <Button className="m-2" variant="secondary" content="Cancel"> Cancel </Button>
+                                <Button className="m-2" variant="danger" content="Cancel"> Cancel </Button>
                             </Link>                    
-                            <Button disabled={ isSubmitting || !dirty || !isValid } className="m-2" variant="success" type="submit">
+                            <Button disabled={ isSubmitting || !dirty || !isValid } className="m-2" variant="dark" type="submit">
                                 {isSubmitting ? (
                                     <>
                                         <Spinner as="span" animation="border" size="sm" role="status" aria-hidden="true" />

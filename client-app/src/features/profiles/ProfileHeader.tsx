@@ -24,7 +24,7 @@ export default observer(function ProfileHeader({ profile }: Props) {
                             </Col>
                             <Col>
                                 <Card.Title as="h1" className="d-flex align-items-center">
-                                    <div className='me-2'> {profile.displayName} </div>
+                                    <div className='me-1'> {profile.displayName} </div>
                                     <FollowButton profile={profile} />
                                 </Card.Title>
                                 <div className="mt-2 d-flex">

@@ -13,6 +13,7 @@ export default class ProfileStore {
     activeTab: number = 0;
     loadingActivities = false;
     userActivities: UserActivity[] = [];
+    loadingFollowButton: { [username: string]: boolean } = {};
 
     constructor() {
         makeAutoObservable(this);
@@ -133,8 +134,9 @@ export default class ProfileStore {
         }
     }
 
+
     updateFollowing = async (username: string, following: boolean) => {
-        this.loading = true;
+        this.loadingFollowButton[username] = true;
         try {
             await agent.Profiles.updateFollowing(username);
             store.activityStore.updateAttendeeFollowing(username);
@@ -152,7 +154,7 @@ export default class ProfileStore {
                         profile.following = !profile.following;
                     }
                 })
-                this.loading = false;
+                this.loadingFollowButton[username] = false;
             })
         } catch (error) {
             console.log(error);

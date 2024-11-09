@@ -25,11 +25,11 @@ export default observer(function ActivityDetails() {
     <>
         <Container>
             <Row>
-                <Col className="d-flex" md={10}>
+                <Col xs={12} sm={9} md={8} className="d-flex flex-column flex-md-row mobileActivityDetails">
                   <ActivityDetailedHeader activity={activity}/>
                   <ActivityDetailedSidebar activity={activity} />
                 </Col>
-                <Col md={6}>
+                <Col xs={12} sm={3} md={6}>
                   <ActivityDetailedInfo activity={activity}/>
                   <ActivityDetailedChat activityId={activity.id} />
                 </Col>

@@ -11,7 +11,7 @@ export default observer(function ActivityDetailedSidebar({ activity: {attendees,
     if(!attendees) return null;
     return (
         <>
-            <Card className="w-25 text-center text-white mb-3" style={{ border: 'none' }}>
+            <Card className="text-center text-white activityDetailedSidebar">
                 <Card.Header className='bg-dark' as="h5">
                     {attendees.length} {attendees.length === 1 ? 'Person' : 'People'}
                 </Card.Header>

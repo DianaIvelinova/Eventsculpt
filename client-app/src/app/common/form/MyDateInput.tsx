@@ -12,6 +12,7 @@ export default function MyDateInput(props: Partial<DatePickerProps>) {
                 {...props}
                 selected={(field.value && new Date(field.value)) || null}
                 onChange={(value) => helpers.setValue(value)}
+                className="form-control"
             />
             {meta.touched && meta.error ? (
                 <Form.Label className="w-100 text-danger"> {meta.error} </Form.Label>

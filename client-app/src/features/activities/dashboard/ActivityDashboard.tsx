@@ -25,7 +25,7 @@ export default observer(function ActivityDashboard() {
 
     return (
         <>
-            <Row className="mt-5">
+            <Row className="mt-5 page-wrapper">
                 <Col width="1">
                     <ActivityFilters />              
                 </Col>

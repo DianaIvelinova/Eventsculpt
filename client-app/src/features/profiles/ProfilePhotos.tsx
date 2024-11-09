@@ -46,7 +46,7 @@ const ProfilePhotos = observer(({ profile }: Props) => {
                 ) : (
                     <Row className="flex-grow-1">
                         {profile.photos?.map(photo => (
-                            <Col key={photo.id} xs={6} sm={5} md={4} lg={3} className="mb-3">
+                            <Col key={photo.id} xs={6} sm={5} md={6} lg={3} className="mb-3">
                                 <Card>
                                     <Image src={photo.url} fluid />
                                     {isCurrentUser && (

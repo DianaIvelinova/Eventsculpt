@@ -6,6 +6,10 @@ a{
   text-decoration: none !important;
 }
 
+.page-wrapper {
+  height: 100vh;
+}
+
 .activityImgText {
   position: absolute;
   bottom: 5%;
@@ -98,6 +102,10 @@ a{
   background-color: #000000ae !important;
 }
 
+.navbar-brand {
+  margin-right: 0 !important;
+}
+
 .nav-link.active {
   background-color: #5B3B8C !important;
   color: #fff !important;
@@ -175,4 +183,36 @@ a{
   display: flex;
 }
 
+.activityDetailedSidebar {
+  margin-left: 1rem;
+  margin-top: 0;
+}
 
+.mobileActivityDetails {
+  margin-bottom: 1rem;
+}
+
+@media (max-width: 768px) {
+  .mobileActivityDetails {
+    width: 100% !important;
+  }
+
+  .activityDetailedSidebar {
+    margin-top: 1rem;
+    margin-left: 0;
+  }
+
+  .navbar .user-image {
+    width: 30px;
+    height: 30px;
+  }
+
+  .navbar .dropdown-toggle {
+    font-size: 0.9rem;
+    padding: 0.2rem 0.4rem;
+  }
+
+  .navbar .dropdown-menu {
+    left: -100px !important;
+  }
+}

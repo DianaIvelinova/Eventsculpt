@@ -23,8 +23,8 @@ export default observer(function HomePage() {
                         </>
                     ) : (
                         <>
-                            <Button onClick={() => modalStore.openModal(<LoginForm />)} className='me-3' size="sm" variant="light"> Login! </Button>
-                            <Button onClick={() => modalStore.openModal(<RegisterForm />)} size="sm" variant="outline-light"> Register! </Button>
+                            <Button onClick={() => modalStore.openModal(<LoginForm />)} className='me-3' size="lg" variant="light"> Login </Button>
+                            <Button onClick={() => modalStore.openModal(<RegisterForm />)} size="lg" variant="outline-light"> Register </Button>
                         </> 
                     )}                  
             </Container>
