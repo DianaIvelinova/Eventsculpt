@@ -26,7 +26,7 @@ export default observer(function ActivityDetailedHeader({ activity }: Props) {
                 <div className='activityImgText'>
                     <h1 className="display-4">{activity.title}</h1>
                     <p>{format(activity.date!, 'dd MMM yyyy')}</p>
-                    <p>Hosted by <strong><Link to={`/profiles/${activity.host?.username}`} className='navLinkPurple'>{activity.host?.displayName}</Link></strong></p>
+                    <p>Hosted by <strong><Link to={`/profiles/${activity.host?.username}`} className='text-white'>{activity.host?.displayName}</Link></strong></p>
                 </div>
             </div>
             <Card.Body>
