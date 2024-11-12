@@ -21,6 +21,12 @@ namespace API.Extensions
             })
             .AddEntityFrameworkStores<DataContext>();
 
+            var tokenKey = config["TokenKey"];
+            if (string.IsNullOrEmpty(tokenKey))
+            {
+                throw new ArgumentNullException("TokenKey cannot be null or empty.");
+            }
+
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(config["TokenKey"]));
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(opt =>
